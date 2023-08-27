@@ -5,16 +5,14 @@ layout: post
 categories: media
 ---
 
-
 ![Cover](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Cover.jpeg)
-
 
 This tutorial guides you through the process of creating __contour plots__ using `ggplot2`. A contour plot is a type of visualization used to represent a 3-dimensional surface by projecting constant `z` values onto a 2-dimensional space. It provides a straightforward way to visualize complex 3-dimensional datasets in a simplified 2-dimensional format. To illustrate the usage of contour plots, we will use the `volcano` dataset from the `rgl` package.
 
 # 1. Contour plot: line
 To illustrate the usage of contour plots, we will use the `volcano` dataset from the `rgl` package. The `volcano` dataset can be thought of as representing the __longitudinal, latitudinal, and height data of a volcano__. The longitudinal and latitudinal coordinates are presented by the `x` and `y` axes, respectively, while the height is represented by the `z` values in the matrix. This dataset consists of 87 rows and 61 columns, describing 5307 observations of the volcano's topography. After data preprocessing, we will work with a subset of the dataset, including 3 columns for `x`, `y`, and `z` dimensions.
 
-![Dataset]()
+![](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Dataset.png)
 
 The data structure is simple, and we will first explore the line version of contour plots. In `ggplot2`, we primarily rely on two different functions: `geom_contour()` for contour plots.
 
@@ -75,7 +73,7 @@ Layout.Mat <- matrix(c(rep(1, 9), rep(2, 8)), nrow = 1)
 grid.arrange(p1, p2, layout_matrix = Layout.Mat)
 ```
 
-![Contour (Version 1)]()
+![](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Contour%20(Version%201).jpeg)
 
 We observe that increasing the number of `bins` results in a denser figure. Although the transformation from 3-dimensional data to a 2-dimensional representation provides a general shape of the data, it doesn't fully capture the original range of continuous variable `z`. Therefore, in the upcoming version, our aim is to visualize the magnitude of the continuous `z` using a contour plot. In the default configuration of `geom_contour()`, two intermediate values are calculated: `level_mid` (a numerical value corresponding to the midpoint of the contour levels) and `level` (an ordered factor representing the contour range). Hence, it becomes necessary to __utilize the `after_stat()` function__ in `ggplot2`. This function enables us to __extract and utilize variables that have been calculated by the `stat`__.
 
@@ -107,7 +105,7 @@ p3$labels$colour <- 'Level of z'
 p3
 ```
 
-![Contour (Version 2)]()
+![Contour (Version 2)](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Contour%20(Version%202).jpeg)
 
 In this version, the contour line values are color-coded using a continuous color scale. Bright colors signify higher magnitudes of `z`, while darker colors represent lower magnitudes of `z`. Instead of visualizing contours solely with lines, we can also represent them using color-filled areas or tiles which we will explore in the next section. 
 
@@ -154,7 +152,7 @@ p4$labels$fill <- 'Level of z'
 p4
 ```
 
-![Contour (Version 3)]()
+![](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Contour%20(Version%203).jpeg)
 
 In this version of the contour plot, each area represented by contour lines from `geom_contour()` is now filled with different colors from a continuous color scale. When compared to the line version of the contour plot, the tile version is likely to be more intuitive. Another alternative to the `geom_contour_filled()` function is to combine the use of `geom_raster()` and `geom_contour()`. The `geom_raster()` function is particularly useful when all the tiles are of the same size, offering high performance. In this context, each tile in a contour plot corresponds to a rectangle or square, and colors are applied to fill each tile to represent the mapping of the 'z' values onto a 2-dimensional grid.
 
@@ -186,7 +184,7 @@ p5$labels$fill <- 'Level of z'
 p5
 ```
 
-![Contour (Version 4)]()
+![](https://raw.githubusercontent.com/YzwIsALaity/Contour-Plot-Tutorial-in-R/adb30487e4d7c721b504c8440e1fa46ad59242c0/Contour%20(Version%204).jpeg)
 
 This version of the contour plot conveys the same level of information as the one mentioned earlier. The key distinction in this version lies in the discretization of the continuous x and y axes into a grid of uniform size. Each grid cell is then filled with a color corresponding to the value of `z`. 
 
